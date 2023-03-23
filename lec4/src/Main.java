@@ -88,7 +88,7 @@ public class Main {
 
     public static void main(String[] args) {
         loadAllReadable("dane//test//test_rodzice");
-        ArrayList<String> filePaths = new ArrayList<>();
+        /*ArrayList<String> filePaths = new ArrayList<>();
         for(File file : new File("dane//test//test_rodzice").listFiles()){
             filePaths.add(file.getPath());
         }
@@ -97,7 +97,7 @@ public class Main {
             System.out.println(Person.relativeCheckList(filePaths).toString());
         } catch (Exception e){
             System.out.println(e.toString());
-        }
+        }*/
 
         //loadAllReadable("dane//test//test_same_osoby");
         //save("people.bin");

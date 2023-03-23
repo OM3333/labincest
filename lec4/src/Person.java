@@ -13,7 +13,7 @@ public class Person implements Serializable {
     private LocalDate birth, death;
     private Person parents[] = new Person[2];
 
-    public static ArrayList<PersonDetails> personDetails = new ArrayList();
+    public static ArrayList<PersonDetails> personDetails = new ArrayList<>();
 
     public Person(String name, LocalDate birth) {
         this(name, birth, null);
@@ -66,8 +66,8 @@ public class Person implements Serializable {
         }
     }
 
-    public static ArrayList<Person> relativeCheckList(ArrayList<String> paths) throws Exception{
-        ArrayList<Person> result = new ArrayList<>();
+    /*public static Map<Person,ArrayList<Person>> relativeCheckList(ArrayList<String> paths) throws Exception{
+        Map<Person,ArrayList<Person>> result = new HashMap<>();
         for(String path : paths){
             Scanner scanner = new Scanner(new File(path));
             ArrayList<String> lines = new ArrayList<>();
@@ -75,8 +75,8 @@ public class Person implements Serializable {
                 String read = scanner.nextLine();
                 lines.add(read);
             }
-            ArrayList<String> names = new ArrayList<>();
-            names.add(lines.get(0));
+            Map<String,ArrayList<String>> names = new HashMap<>();
+            names.put(lines.get(0), new ArrayList<String>());
             for(int i = 2;i<4;++i){
                 if(lines.size()<=i){
                     break;
@@ -84,7 +84,7 @@ public class Person implements Serializable {
                 if(lines.get(i).compareTo("Rodzice:")==0){
                     for(int j = 0;j<2;++j){
                         if(lines.size()>i+j){
-                            names.add(lines.get(i+j));
+                            names.put(lines.get(i+j));
                         }
                     }
                 }
@@ -92,12 +92,19 @@ public class Person implements Serializable {
             for(PersonDetails personDetails : personDetails){
                 Person person = personDetails.person;
                 if(names.contains(personDetails.person.name)){
-                    result.add(person);
+                    result.put() .add(person);
                 }
 
             }
         }
         return result;
+    }*/
+
+    public static void addParents(){
+        //ArrayList<Person> peopleToCompare = relativeCheckList()
+        for(PersonDetails personDetail : personDetails){
+
+        }
     }
 
     public Person createPerson(String filePath) throws Exception {
@@ -110,15 +117,9 @@ public class Person implements Serializable {
         Person person = null;
         String name = lines.get(0);
         LocalDate birthDate = LocalDate.parse(lines.get(1), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        if (lines.size() > 2) {
-            if(lines.get(2).compareTo("Rodzice:")==0){
-                //person.parents
-
-            }
-            else{
+        if (lines.size() > 2 && lines.get(2).compareTo("Rodzice:")!=0) {
                 LocalDate deathDate = LocalDate.parse(lines.get(2), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 person = new Person(name, birthDate, deathDate);
-            }
         }
         else {
             person = new Person(name, birthDate);
