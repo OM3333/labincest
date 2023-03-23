@@ -3,6 +3,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void save(String path) {
@@ -71,10 +72,37 @@ public class Main {
         }
     }
 
+    public static void loadReadable(String path){
+        try{
+            Person person = new Person(null,null).createPerson(path);
+            System.out.println(person.toString());
+        } catch (Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    public static void loadAllReadable(String path){
+        for(File file : new File(path).listFiles()){
+            loadReadable(file.getPath());
+        }
+    }
+
     public static void main(String[] args) {
+        loadAllReadable("dane//test//test_rodzice");
+        ArrayList<String> filePaths = new ArrayList<>();
+        for(File file : new File("dane//test//test_rodzice").listFiles()){
+            filePaths.add(file.getPath());
+        }
+        try{
+
+            System.out.println(Person.relativeCheckList(filePaths).toString());
+        } catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+        //loadAllReadable("dane//test//test_same_osoby");
         //save("people.bin");
 
-        load("people.bin");
+        //load("people.bin");
         /*
         try {
             Person mirek = new Person("Mirek",
